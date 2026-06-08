@@ -14,7 +14,6 @@ type Props = {
 
 // Bright gold for a perfectly-hit target; soft amber for going over.
 const GOLD = "#ffc800";
-const AMBER = "#f59e0b";
 
 export default function ProgressRing({
   value,
@@ -37,7 +36,9 @@ export default function ProgressRing({
   // red) when over.
   const perfect = celebrate && ratio >= 0.97 && ratio <= 1.06;
   const over = celebrate && ratio > 1.06;
-  const ringColor = perfect ? GOLD : over ? AMBER : color;
+  // Over-target keeps the metric's own color (a full green ring) rather than
+  // repainting amber — the amber status text below carries the "over" signal.
+  const ringColor = perfect ? GOLD : color;
   const numberColor = perfect ? "#b88400" : over ? "#b45309" : "#0f172a";
 
   return (
@@ -78,7 +79,7 @@ export default function ProgressRing({
           >
             {Math.round(value)}
           </span>
-          <span className="mt-1 text-[11px] font-bold text-slate-400">
+          <span className="mt-1 text-[11px] font-bold text-slate-500">
             / {Math.round(target)} {unit}
           </span>
         </div>
@@ -86,9 +87,9 @@ export default function ProgressRing({
       <div className="mt-2 text-center">
         <div className="text-sm font-extrabold text-slate-700">{label}</div>
         {perfect ? (
-          <div className="text-xs font-extrabold text-sun-600">🎯 Goal hit!</div>
+          <div className="text-xs font-extrabold text-belly-700">🎯 Goal hit!</div>
         ) : (
-          <div className={`text-xs font-bold ${over ? "text-amber-600" : "text-slate-400"}`}>
+          <div className={`text-xs font-bold ${over ? "text-amber-700" : "text-slate-500"}`}>
             {over
               ? `${Math.abs(remaining)} ${unit} over`
               : `${Math.max(0, remaining)} ${unit} to go`}

@@ -47,7 +47,7 @@ export default function MacroSummary({
               label="Fats"
               pct={(split.fats / totalEnergy) * 100}
             />
-            <p className="mt-1 max-w-[12rem] text-xs text-slate-400">
+            <p className="mt-1 max-w-[12rem] text-xs text-slate-500">
               Share of energy consumed today by macronutrient.
             </p>
           </div>
@@ -87,7 +87,7 @@ function Legend({ color, label, pct }: { color: string; label: string; pct: numb
     <div className="flex items-center gap-2 text-sm">
       <span className="h-3 w-3 rounded-sm" style={{ background: color }} />
       <span className="font-medium text-slate-600">{label}</span>
-      <span className="tabular-nums text-slate-400">{Math.round(pct)}%</span>
+      <span className="tabular-nums text-slate-500">{Math.round(pct)}%</span>
     </div>
   );
 }

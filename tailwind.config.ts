@@ -40,7 +40,7 @@ const config: Config = {
       boxShadow: {
         // 3D "clicky" bottom edges — the Duolingo button look.
         pop: "0 4px 0 0 rgba(15,23,42,0.12)",
-        "pop-green": "0 4px 0 0 #46a302",
+        "pop-green": "0 4px 0 0 #3a8500",
         "pop-sun": "0 4px 0 0 #e0a800",
         card: "0 6px 0 0 rgba(70,163,2,0.08), 0 18px 30px -20px rgba(15,23,42,0.25)",
         soft: "0 10px 30px -12px rgba(15, 23, 42, 0.12)",

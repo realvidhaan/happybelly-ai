@@ -143,14 +143,14 @@ export default function ReviewModal({
       </div>
 
       {!isEdit && (
-        <div className="mb-2 flex items-center gap-1.5 text-xs text-slate-400">
+        <div className="mb-2 flex items-center gap-1.5 text-xs text-slate-500">
           <Sparkles className="h-3.5 w-3.5 text-belly-400" />
           {draft.source === "vision" ? "Estimated from your photo" : "Estimated from your description"}
         </div>
       )}
 
       {/* Column header (desktop) */}
-      <div className="hidden grid-cols-[1fr_repeat(5,3.6rem)_2rem] items-center gap-1.5 px-1 pb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400 sm:grid">
+      <div className="hidden grid-cols-[1fr_repeat(5,3.6rem)_2rem] items-center gap-1.5 px-1 pb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:grid">
         <span>Item</span>
         <span className="text-center">g</span>
         <span className="text-center">kcal</span>
@@ -185,22 +185,22 @@ export default function ReviewModal({
               ))}
               <button
                 onClick={() => removeRow(item.id)}
-                className="flex h-8 w-8 items-center justify-center justify-self-end rounded-lg text-slate-300 transition hover:bg-red-50 hover:text-red-500"
+                className="flex h-9 w-9 items-center justify-center justify-self-end rounded-xl text-slate-400 transition hover:bg-red-50 hover:text-red-500"
                 aria-label="Remove item"
               >
                 <Trash2 className="h-4 w-4" />
               </button>
             </div>
             <div className="mt-1.5 flex items-center gap-1.5 sm:mt-1">
-              <span className="text-[10px] font-medium uppercase text-slate-300">Quick</span>
-              <button onClick={() => scaleRow(item.id, 0.5)} className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 hover:bg-slate-200">
+              <span className="text-[11px] font-bold uppercase text-slate-500">Quick</span>
+              <button onClick={() => scaleRow(item.id, 0.5)} className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600 hover:bg-slate-200">
                 ½×
               </button>
-              <button onClick={() => scaleRow(item.id, 2)} className="rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 hover:bg-slate-200">
+              <button onClick={() => scaleRow(item.id, 2)} className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600 hover:bg-slate-200">
                 2×
               </button>
               {item.confidence !== undefined && (
-                <span className="ml-auto text-[10px] text-slate-300">
+                <span className="ml-auto text-[11px] text-slate-400">
                   {Math.round(item.confidence * 100)}% sure
                 </span>
               )}
@@ -225,7 +225,7 @@ function MacroPill({ label, value, color }: { label: string; value: number; colo
       <span className="h-2 w-2 rounded-full" style={{ background: color }} />
       <span className="tabular-nums text-slate-600">
         {round1(value)}
-        <span className="text-slate-400">{label}</span>
+        <span className="text-slate-500">{label}</span>
       </span>
     </span>
   );

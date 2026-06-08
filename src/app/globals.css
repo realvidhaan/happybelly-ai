@@ -28,14 +28,15 @@ body {
   /* Bouncy, clicky buttons — press down onto their bottom shadow */
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-2.5 text-sm font-extrabold
-      transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50;
+      transition-all duration-150 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-belly-200
+      disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none;
   }
   .btn:active:not(:disabled) {
     transform: translateY(3px);
     box-shadow: none;
   }
   .btn-primary {
-    @apply btn bg-belly-500 text-white shadow-pop-green hover:bg-belly-400;
+    @apply btn bg-belly-600 text-white shadow-pop-green hover:bg-belly-500;
   }
   .btn-accent {
     @apply btn bg-sun-500 text-belly-700 shadow-pop-sun hover:bg-sun-400;
@@ -57,7 +58,7 @@ body {
       text-slate-800 outline-none transition focus:border-belly-400 focus:ring-4 focus:ring-belly-100;
   }
   .label {
-    @apply mb-1 block text-xs font-extrabold uppercase tracking-wide text-slate-400;
+    @apply mb-1 block text-xs font-extrabold uppercase tracking-wide text-slate-500;
   }
 }
 
@@ -78,4 +79,16 @@ input[type="number"] {
 }
 .scroll-thin::-webkit-scrollbar-thumb {
   @apply rounded-full bg-belly-100;
+}
+
+/* Respect users who prefer reduced motion — calm all the bouncy animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

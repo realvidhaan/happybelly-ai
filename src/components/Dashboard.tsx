@@ -5,7 +5,6 @@ import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { useTracker } from "@/lib/store";
 import { addDays, formatDayLabel, todayStr } from "@/lib/date";
 import { resolveTargets, sumMeals } from "@/lib/nutrition";
-import { currentStreak } from "@/lib/streak";
 import { burstConfetti, celebrateConfetti } from "@/lib/confetti";
 import type { Meal, ParseResponse } from "@/lib/types";
 import Header from "./Header";
@@ -49,7 +48,6 @@ export default function Dashboard() {
   );
   const consumed = useMemo(() => sumMeals(dayMeals), [dayMeals]);
   const targets = useMemo(() => resolveTargets(profile), [profile]);
-  const streak = currentStreak(meals);
   const isToday = selectedDate === todayStr();
 
   // Celebrate when the user's calories enter the "perfect" band for a day — but
@@ -105,7 +103,7 @@ export default function Dashboard() {
 
   if (!hydrated) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-slate-400">
+      <div className="flex min-h-screen items-center justify-center text-slate-500">
         <Sparkles className="mr-2 h-5 w-5 animate-pulse text-belly-400" />
         Loading HappyBelly AI…
       </div>
@@ -130,7 +128,7 @@ export default function Dashboard() {
         <div className="flex items-center gap-1">
           <button
             onClick={() => setSelectedDate((d) => addDays(d, -1))}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+            className="rounded-xl p-2.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800"
             aria-label="Previous day"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -141,7 +139,7 @@ export default function Dashboard() {
           <button
             onClick={() => setSelectedDate((d) => addDays(d, 1))}
             disabled={isToday}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 disabled:opacity-30"
+            className="rounded-xl p-2.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800 disabled:opacity-30"
             aria-label="Next day"
           >
             <ChevronRight className="h-5 w-5" />
@@ -149,15 +147,12 @@ export default function Dashboard() {
           {!isToday && (
             <button
               onClick={() => setSelectedDate(todayStr())}
-              className="ml-1 rounded-lg bg-slate-100 px-2 py-1 text-xs font-semibold text-slate-500 hover:bg-slate-200"
+              className="ml-1 rounded-xl bg-slate-100 px-2.5 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-200"
             >
               Jump to today
             </button>
           )}
         </div>
-        {streak > 0 && (
-          <span className="text-sm font-semibold text-belly-600">🔥 {streak}-day streak</span>
-        )}
       </div>
 
       {/* Main grid */}
@@ -176,7 +171,7 @@ export default function Dashboard() {
       </div>
 
       {/* Footer utilities */}
-      <footer className="mt-10 flex flex-col items-center gap-3 border-t border-slate-100 pt-6 text-xs text-slate-400">
+      <footer className="mt-10 flex flex-col items-center gap-3 border-t border-slate-100 pt-6 text-xs text-slate-500">
         <div className="flex items-center gap-3">
           {meals.length === 0 && weights.length === 0 && (
             <button onClick={loadSampleData} className="btn-soft text-xs">
@@ -190,7 +185,7 @@ export default function Dashboard() {
                 setSelectedDate(todayStr());
               }
             }}
-            className="inline-flex items-center gap-1 text-slate-400 hover:text-red-500"
+            className="inline-flex items-center gap-1 text-slate-500 hover:text-red-500"
           >
             <RotateccwIcon /> Reset all data
           </button>

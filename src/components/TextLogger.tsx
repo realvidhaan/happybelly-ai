@@ -77,7 +77,7 @@ export default function TextLogger({
       )}
 
       <div className="mt-3 flex items-center justify-between">
-        <span className="hidden items-center gap-1 text-[11px] text-slate-400 sm:flex">
+        <span className="hidden items-center gap-1 text-[11px] text-slate-500 sm:flex">
           <CornerDownLeft className="h-3 w-3" /> ⌘/Ctrl + Enter to analyze
         </span>
         <button onClick={analyze} disabled={!text.trim() || loading} className="btn-primary ml-auto">

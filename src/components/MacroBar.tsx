@@ -18,7 +18,8 @@ export default function MacroBar({
   const perfect = ratio >= 0.97 && ratio <= 1.06;
   const over = ratio > 1.06;
   const remaining = Math.round(target - value);
-  const fill = perfect ? "#ffc800" : over ? "#f59e0b" : color;
+  // Over-target keeps the macro's own color; "over" is signalled by text only.
+  const fill = perfect ? "#ffc800" : color;
 
   return (
     <div>
@@ -41,7 +42,7 @@ export default function MacroBar({
       </div>
       <div
         className={`mt-1 text-right text-[11px] font-bold ${
-          perfect ? "text-sun-600" : over ? "text-amber-600" : "text-slate-400"
+          perfect ? "text-belly-700" : over ? "text-amber-700" : "text-slate-500"
         }`}
       >
         {perfect

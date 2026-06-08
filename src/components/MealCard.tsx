@@ -48,7 +48,7 @@ export default function MealCard({
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <h4 className="truncate font-semibold text-slate-800">{meal.title}</h4>
-              <span className="shrink-0 text-xs text-slate-400">{formatTime(meal.createdAt)}</span>
+              <span className="shrink-0 text-xs text-slate-500">{formatTime(meal.createdAt)}</span>
             </div>
             <div className="mt-0.5 flex items-center gap-2 text-xs text-slate-500">
               <span className="font-bold tabular-nums text-slate-700">
@@ -74,7 +74,7 @@ export default function MealCard({
               <li key={it.id} className="flex items-center justify-between gap-2 text-sm">
                 <span className="min-w-0 truncate text-slate-600">
                   {it.name}
-                  <span className="ml-1 text-xs text-slate-400">{round1(it.grams)}g</span>
+                  <span className="ml-1 text-xs text-slate-500">{round1(it.grams)}g</span>
                 </span>
                 <span className="shrink-0 text-xs tabular-nums text-slate-500">
                   {Math.round(it.calories)} kcal · {round1(it.protein)}/{round1(it.carbs)}/
@@ -85,7 +85,7 @@ export default function MealCard({
           </ul>
 
           <div className="mt-3 flex flex-wrap items-center gap-1.5">
-            <span className="mr-1 text-[10px] font-semibold uppercase tracking-wide text-slate-300">
+            <span className="mr-1 text-[11px] font-bold uppercase tracking-wide text-slate-500">
               Quick adjust
             </span>
             <button onClick={() => scaleMeal(meal.id, 0.5)} className="btn-soft px-2.5 py-1 text-xs">
@@ -103,7 +103,11 @@ export default function MealCard({
                 <PencilLine className="h-3.5 w-3.5" /> Edit
               </button>
               <button
-                onClick={() => deleteMeal(meal.id)}
+                onClick={() => {
+                  if (confirm(`Delete "${meal.title}"? This can't be undone.`)) {
+                    deleteMeal(meal.id);
+                  }
+                }}
                 className="btn px-2.5 py-1 text-xs text-red-500 hover:bg-red-50"
                 aria-label="Delete meal"
               >

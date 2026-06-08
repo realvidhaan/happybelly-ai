@@ -17,7 +17,7 @@ export default function StreakBadge({ meals }: { meals: Meal[] }) {
         <div className="flex items-center gap-3">
           <div
             className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-              hot ? "bg-sun-100 text-sun-600 shadow-pop-sun" : "bg-slate-100 text-slate-400"
+              hot ? "bg-sun-100 text-sun-600 shadow-pop-sun" : "bg-slate-100 text-slate-500"
             }`}
           >
             <Flame className={`h-6 w-6 ${hot ? "animate-wiggle fill-sun-400" : ""}`} />
@@ -29,7 +29,7 @@ export default function StreakBadge({ meals }: { meals: Meal[] }) {
                 day{streak === 1 ? "" : "s"} streak
               </span>
             </div>
-            <p className="text-xs font-semibold text-slate-400">
+            <p className="text-xs font-semibold text-slate-500">
               Best: {best} day{best === 1 ? "" : "s"}
             </p>
           </div>
@@ -45,14 +45,14 @@ export default function StreakBadge({ meals }: { meals: Meal[] }) {
                 d.logged ? "bg-belly-400" : "bg-slate-100"
               }`}
             />
-            <span className="text-[10px] font-medium text-slate-400">
+            <span className="text-[10px] font-medium text-slate-500">
               {weekdayInitial(d.date)}
             </span>
           </div>
         ))}
       </div>
       {streak === 0 && (
-        <p className="mt-3 text-center text-xs text-slate-400">
+        <p className="mt-3 text-center text-xs text-slate-500">
           Log a meal today to start a streak 🔥
         </p>
       )}

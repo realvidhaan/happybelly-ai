@@ -29,8 +29,8 @@ export default function XpBar({
           <span className="truncate text-base font-extrabold text-slate-800 sm:text-lg">
             {xp.title}
           </span>
-          <span className="flex shrink-0 items-center gap-1 text-xs font-black text-sun-600">
-            <Zap className="h-3.5 w-3.5 fill-sun-500" />
+          <span className="flex shrink-0 items-center gap-1 text-xs font-black text-slate-600">
+            <Zap className="h-3.5 w-3.5 fill-sun-500 text-sun-500" />
             {xp.xp.toLocaleString()} XP
           </span>
         </div>
@@ -41,7 +41,7 @@ export default function XpBar({
             style={{ width: `${Math.max(6, xp.pctToNext * 100)}%` }}
           />
         </div>
-        <div className="mt-1 text-right text-[11px] font-bold text-slate-400">
+        <div className="mt-1 text-right text-[11px] font-bold text-slate-500">
           {xp.intoLevel} / {xp.nextLevelXp} XP to Level {xp.level + 1}
         </div>
       </div>

@@ -24,7 +24,7 @@ export default function TdeeCard({
   const trend = t.weightTrendKgPerWeek;
   const TrendIcon = trend < -0.05 ? TrendingDown : trend > 0.05 ? TrendingUp : Minus;
   const trendColor =
-    trend < -0.05 ? "text-emerald-600" : trend > 0.05 ? "text-rose-600" : "text-slate-400";
+    trend < -0.05 ? "text-emerald-600" : trend > 0.05 ? "text-rose-600" : "text-slate-500";
 
   return (
     <section className="card p-5">
@@ -59,7 +59,7 @@ export default function TdeeCard({
         <Stat label="Baseline" value={`${t.staticEstimate}`} sub="Mifflin × activity" />
       </div>
 
-      <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-slate-400">
+      <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-slate-500">
         <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
         {t.usedFallback
           ? "Showing your baseline estimate. Log meals on 3+ days and add 2+ weigh-ins to unlock your true, adaptive TDEE."
@@ -82,14 +82,14 @@ function Stat({
 }) {
   return (
     <div className="rounded-xl bg-slate-50 px-2 py-2.5">
-      <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+      <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-500">
         {label}
       </div>
       <div className="mt-0.5 flex items-center justify-center gap-1 text-base font-bold tabular-nums text-slate-800">
         {icon}
         {value}
       </div>
-      <div className="text-[10px] text-slate-400">{sub}</div>
+      <div className="text-[10px] text-slate-500">{sub}</div>
     </div>
   );
 }

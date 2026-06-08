@@ -19,8 +19,8 @@ export const MACROS: Record<MacroKey, MacroMeta> = {
     label: "Calories",
     short: "Cal",
     unit: "kcal",
-    color: "#f59e0b",
-    soft: "rgba(245, 158, 11, 0.15)",
+    color: "#ffc800",
+    soft: "rgba(255, 200, 0, 0.15)",
   },
   protein: {
     key: "protein",

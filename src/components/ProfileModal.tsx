@@ -235,7 +235,7 @@ export default function ProfileModal({
               className="h-5 w-5 accent-belly-500"
             />
           </label>
-          <p className="mt-1 text-xs font-semibold text-slate-400">
+          <p className="mt-1 text-xs font-semibold text-slate-500">
             {useAutoTargets
               ? "Derived from your stats with the Mifflin–St Jeor equation."
               : "Set your own targets below."}

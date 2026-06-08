@@ -21,7 +21,7 @@ export default function Header({
           <h1 className="text-2xl font-black tracking-tight text-slate-900">
             HappyBelly <span className="text-belly-500">AI</span>
           </h1>
-          <p className="text-xs font-semibold text-slate-400">
+          <p className="text-xs font-semibold text-slate-500">
             Log a meal in seconds — just say it or shoot it.
           </p>
         </div>
@@ -30,7 +30,7 @@ export default function Header({
       <div className="flex items-center gap-2">
         {learnedCount > 0 && (
           <span
-            className="hidden items-center gap-1.5 rounded-full bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-600 sm:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full bg-belly-50 px-3 py-1.5 text-xs font-bold text-belly-700 sm:inline-flex"
             title={`HappyBelly AI has learned ${learnedCount} of your personal corrections and applies them to new estimates.`}
           >
             <BrainCircuit className="h-3.5 w-3.5" />

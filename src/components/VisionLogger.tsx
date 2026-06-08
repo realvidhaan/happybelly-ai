@@ -112,7 +112,7 @@ export default function VisionLogger({
           <p className="text-sm font-semibold text-slate-700">
             Drag &amp; drop a food photo
           </p>
-          <p className="text-xs text-slate-400">or click to browse · JPG/PNG</p>
+          <p className="text-xs text-slate-500">or click to browse · JPG/PNG</p>
           <button
             onClick={(e) => {
               e.stopPropagation();

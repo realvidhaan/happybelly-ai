@@ -77,7 +77,7 @@ export default function WeightPanel() {
               key={w.id}
               className="flex items-center justify-between text-sm text-slate-600"
             >
-              <span className="text-slate-400">{formatDayLabel(w.date)}</span>
+              <span className="text-slate-500">{formatDayLabel(w.date)}</span>
               <span className="font-semibold tabular-nums">
                 {imperial ? kgToLb(w.weightKg) : round1(w.weightKg)} {unit}
               </span>
@@ -85,7 +85,7 @@ export default function WeightPanel() {
           ))}
         </ul>
       ) : (
-        <p className="mt-3 text-xs text-slate-400">
+        <p className="mt-3 text-xs text-slate-500">
           Add weigh-ins to power your adaptive TDEE.
         </p>
       )}
