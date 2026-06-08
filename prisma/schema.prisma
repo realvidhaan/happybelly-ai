@@ -1,0 +1,138 @@
+// HappyBelly AI — database schema
+// The running app persists to the browser (localStorage) so it works with zero
+// setup. This schema is the production persistence layer: point DATABASE_URL at a
+// Supabase/Postgres instance and run `npm run db:push` to materialize it, then swap
+// the localStorage store in src/lib/store.tsx for these tables behind your API routes.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Sex {
+  male
+  female
+}
+
+enum ActivityLevel {
+  sedentary
+  light
+  moderate
+  active
+  very_active
+}
+
+enum Goal {
+  lose
+  maintain
+  gain
+}
+
+enum MealSource {
+  text
+  vision
+  manual
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+
+  profile     Profile?
+  dailyLogs   DailyLog[]
+  weightLogs  WeightLog[]
+  corrections UserCorrection[]
+}
+
+// Body stats + macro targets. One per user.
+model Profile {
+  id           String        @id @default(cuid())
+  userId       String        @unique
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  sex          Sex           @default(male)
+  age          Int           @default(30)
+  heightCm     Float         @default(178)
+  weightKg     Float         @default(80)
+  activity     ActivityLevel @default(moderate)
+  goal         Goal          @default(maintain)
+  unit         String        @default("metric") // "metric" | "imperial"
+
+  // Macro targets. If useAutoTargets is true these are recomputed from body stats.
+  useAutoTargets Boolean @default(true)
+  targetCalories Int     @default(2200)
+  targetProtein  Int     @default(165)
+  targetCarbs    Int     @default(220)
+  targetFats     Int     @default(73)
+
+  updatedAt    DateTime @updatedAt
+}
+
+// A logged meal = a group of food items eaten on a given day.
+model DailyLog {
+  id        String     @id @default(cuid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  date      String     // YYYY-MM-DD (user-local day)
+  title     String
+  source    MealSource @default(manual)
+  note      String?
+  createdAt DateTime   @default(now())
+
+  items     FoodItem[]
+
+  @@index([userId, date])
+}
+
+// One nutrition row within a meal.
+model FoodItem {
+  id         String   @id @default(cuid())
+  dailyLogId String
+  dailyLog   DailyLog @relation(fields: [dailyLogId], references: [id], onDelete: Cascade)
+
+  name       String
+  grams      Float
+  calories   Float
+  protein    Float
+  carbs      Float
+  fats       Float
+  confidence Float?   // model's self-reported confidence, 0–1
+
+  @@index([dailyLogId])
+}
+
+model WeightLog {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  date     String // YYYY-MM-DD
+  weightKg Float
+
+  @@unique([userId, date])
+  @@index([userId, date])
+}
+
+// The self-correcting feedback loop. Every time the user overrides an AI estimate
+// we store the delta so we can replay the most frequent corrections as few-shot
+// examples on the next request.
+model UserCorrection {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  foodName  String
+  field     String   // "grams" | "calories" | "protein" | "carbs" | "fats"
+  aiValue   Float
+  userValue Float
+  createdAt DateTime @default(now())
+
+  @@index([userId, foodName])
+}
