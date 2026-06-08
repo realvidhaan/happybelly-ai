@@ -1,9 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import { TrackerProvider } from "@/lib/store";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+// Rounded, friendly typeface for the playful Duolingo-style look.
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800", "900"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "HappyBelly AI — effortless calorie & macro tracking",
@@ -13,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f97316",
+  themeColor: "#58cc02",
   width: "device-width",
   initialScale: 1,
 };
@@ -24,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={nunito.variable}>
       <body>
         <TrackerProvider>{children}</TrackerProvider>
       </body>

@@ -24,9 +24,9 @@ export default function MacroSummary({
           <ProgressRing
             value={consumed.calories}
             target={targets.calories}
-            color={MACROS.calories.color}
+            color="#58cc02"
             size={168}
-            stroke={15}
+            stroke={16}
             label="Calories"
             unit="kcal"
             big

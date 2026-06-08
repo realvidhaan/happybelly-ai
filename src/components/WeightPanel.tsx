@@ -62,7 +62,7 @@ export default function WeightPanel() {
           <polyline
             points={sparkline.points}
             fill="none"
-            stroke="#f97316"
+            stroke="#58cc02"
             strokeWidth="1.6"
             strokeLinecap="round"
             strokeLinejoin="round"

@@ -17,19 +17,19 @@ export default function StreakBadge({ meals }: { meals: Meal[] }) {
         <div className="flex items-center gap-3">
           <div
             className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-              hot ? "bg-belly-100 text-belly-600" : "bg-slate-100 text-slate-400"
+              hot ? "bg-sun-100 text-sun-600 shadow-pop-sun" : "bg-slate-100 text-slate-400"
             }`}
           >
-            <Flame className="h-6 w-6" />
+            <Flame className={`h-6 w-6 ${hot ? "animate-wiggle fill-sun-400" : ""}`} />
           </div>
           <div>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-bold tabular-nums text-slate-900">{streak}</span>
-              <span className="text-sm font-medium text-slate-500">
+              <span className="text-2xl font-black tabular-nums text-slate-900">{streak}</span>
+              <span className="text-sm font-bold text-slate-500">
                 day{streak === 1 ? "" : "s"} streak
               </span>
             </div>
-            <p className="text-xs text-slate-400">Best: {best} days</p>
+            <p className="text-xs font-semibold text-slate-400">Best: {best} days</p>
           </div>
         </div>
       </div>

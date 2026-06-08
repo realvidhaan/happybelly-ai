@@ -17,7 +17,7 @@ export default function QuickLogPanel({
 
   return (
     <section className="card overflow-hidden">
-      <div className="flex items-center gap-1 border-b border-slate-100 p-2">
+      <div className="flex items-center gap-2 border-b-2 border-belly-50 p-2.5">
         <TabButton active={tab === "text"} onClick={() => setTab("text")} icon={<PencilLine className="h-4 w-4" />}>
           Plain English
         </TabButton>
@@ -51,8 +51,10 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold transition ${
-        active ? "bg-belly-500 text-white shadow-sm" : "text-slate-500 hover:bg-slate-100"
+      className={`flex flex-1 items-center justify-center gap-2 rounded-2xl px-3 py-2.5 text-sm font-extrabold transition-all duration-150 active:translate-y-[2px] ${
+        active
+          ? "-translate-y-0.5 bg-belly-500 text-white shadow-pop-green hover:bg-belly-400"
+          : "text-slate-500 hover:bg-belly-50"
       }`}
     >
       {icon}

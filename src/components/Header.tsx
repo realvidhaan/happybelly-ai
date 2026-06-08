@@ -13,15 +13,17 @@ export default function Header({
 }) {
   return (
     <header className="flex items-center justify-between gap-3">
-      <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-belly-400 to-belly-600 text-white shadow-soft">
-          <Salad className="h-6 w-6" />
+      <div className="group flex items-center gap-3">
+        <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-belly-400 to-belly-600 text-white shadow-pop-green transition-transform group-hover:-rotate-6">
+          <Salad className="h-7 w-7" />
         </div>
         <div>
-          <h1 className="text-xl font-extrabold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-black tracking-tight text-slate-900">
             HappyBelly <span className="text-belly-500">AI</span>
           </h1>
-          <p className="text-xs text-slate-400">Log a meal in seconds — just say it or shoot it.</p>
+          <p className="text-xs font-semibold text-slate-400">
+            Log a meal in seconds — just say it or shoot it.
+          </p>
         </div>
       </div>
 

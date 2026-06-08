@@ -1,13 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { useTracker } from "@/lib/store";
 import { addDays, formatDayLabel, todayStr } from "@/lib/date";
 import { resolveTargets, sumMeals } from "@/lib/nutrition";
 import { currentStreak } from "@/lib/streak";
+import { burstConfetti, celebrateConfetti } from "@/lib/confetti";
 import type { Meal, ParseResponse } from "@/lib/types";
 import Header from "./Header";
+import XpBar from "./XpBar";
 import MacroSummary from "./MacroSummary";
 import QuickLogPanel from "./QuickLogPanel";
 import MealTimeline from "./MealTimeline";
@@ -50,6 +52,18 @@ export default function Dashboard() {
   const streak = currentStreak(meals);
   const isToday = selectedDate === todayStr();
 
+  // Celebrate when the user's calories enter the "perfect" band for a day — but
+  // only on the transition into the band (never on initial load), once per day.
+  const bandByDate = useRef<Record<string, boolean>>({});
+  useEffect(() => {
+    if (!hydrated) return;
+    const ratio = targets.calories ? consumed.calories / targets.calories : 0;
+    const inBand = ratio >= 0.97 && ratio <= 1.06;
+    const prev = bandByDate.current[selectedDate];
+    if (inBand && prev === false) celebrateConfetti();
+    bandByDate.current[selectedDate] = inBand;
+  }, [consumed.calories, targets.calories, selectedDate, hydrated]);
+
   // AI parse → open the review modal pre-filled.
   const onParsed = (res: ParseResponse, source: "text" | "vision") => {
     setDraft({
@@ -83,6 +97,8 @@ export default function Dashboard() {
         items: result.items,
         original: result.original,
       });
+      // Reward committing a fresh meal to the log.
+      burstConfetti();
     }
     setDraft(null);
   };
@@ -104,8 +120,13 @@ export default function Dashboard() {
         onOpenProfile={() => setProfileOpen(true)}
       />
 
+      {/* Gamified XP / level tracker */}
+      <div className="mt-5">
+        <XpBar meals={meals} weights={weights} />
+      </div>
+
       {/* Date navigation */}
-      <div className="mt-6 flex items-center justify-between">
+      <div className="mt-5 flex items-center justify-between">
         <div className="flex items-center gap-1">
           <button
             onClick={() => setSelectedDate((d) => addDays(d, -1))}
