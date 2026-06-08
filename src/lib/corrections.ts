@@ -30,7 +30,7 @@ export function diffCorrections(
     if (!match) continue;
     for (const field of FIELDS) {
       const ai = Number(match[field] ?? 0);
-      const user = Number((item as Record<string, number>)[field] ?? 0);
+      const user = Number((item as unknown as Record<string, number>)[field] ?? 0);
       if (isMeaningful(field, ai, user)) {
         out.push({ foodName: item.name.trim(), field, aiValue: ai, userValue: user });
       }
