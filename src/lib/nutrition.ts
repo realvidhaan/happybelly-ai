@@ -121,9 +121,12 @@ export function calorieSplit(m: MacroSet): { protein: number; carbs: number; fat
 
 // kg <-> lb helpers for the imperial unit toggle.
 export const KG_PER_LB = 0.45359237;
+// Display conversion: round only here, never on the stored value. Storing the
+// rounded kg and then converting back to lb double-rounds and drifts the number
+// (e.g. typing 76 lb would re-display as 76.1), so keep the canonical kg precise.
 export function kgToLb(kg: number): number {
   return round1(kg / KG_PER_LB);
 }
 export function lbToKg(lb: number): number {
-  return round1(lb * KG_PER_LB);
+  return lb * KG_PER_LB;
 }

@@ -3,7 +3,7 @@
 import { Flame } from "lucide-react";
 import type { Meal } from "@/lib/types";
 import { currentStreak, longestStreak, recentDays } from "@/lib/streak";
-import { formatDayLabel } from "@/lib/date";
+import { formatDayLabel, weekdayInitial } from "@/lib/date";
 
 export default function StreakBadge({ meals }: { meals: Meal[] }) {
   const streak = currentStreak(meals);
@@ -29,7 +29,9 @@ export default function StreakBadge({ meals }: { meals: Meal[] }) {
                 day{streak === 1 ? "" : "s"} streak
               </span>
             </div>
-            <p className="text-xs font-semibold text-slate-400">Best: {best} days</p>
+            <p className="text-xs font-semibold text-slate-400">
+              Best: {best} day{best === 1 ? "" : "s"}
+            </p>
           </div>
         </div>
       </div>
@@ -44,7 +46,7 @@ export default function StreakBadge({ meals }: { meals: Meal[] }) {
               }`}
             />
             <span className="text-[10px] font-medium text-slate-400">
-              {formatDayLabel(d.date)[0]}
+              {weekdayInitial(d.date)}
             </span>
           </div>
         ))}

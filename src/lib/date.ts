@@ -40,6 +40,14 @@ export function formatDayLabel(s: string): string {
   });
 }
 
+const WEEKDAY_INITIALS = ["S", "M", "T", "W", "T", "F", "S"];
+
+// Single-letter weekday for the streak strip (always a weekday, never "Y"/"T"
+// from relative labels like "Yesterday"/"Today").
+export function weekdayInitial(s: string): string {
+  return WEEKDAY_INITIALS[parseDateStr(s).getDay()];
+}
+
 export function formatTime(iso: string): string {
   try {
     return new Date(iso).toLocaleTimeString(undefined, {
